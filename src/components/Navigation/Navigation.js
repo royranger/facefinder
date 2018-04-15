@@ -1,15 +1,15 @@
-import React, {Component} from 'react';
+import React from 'react';
 import './Navigation.css';
 
-class Navigation extends Component {
+const Navigation = () => {
 
-  render() {
-    return(
-      <div>
+  return(
+    <nav className="navigation">
+      <p className="f3 link dim black underline pa3 pointer">Sign out</p>
+    </nav>
+  );
 
-      </div>
-    );
-  }
+
 }
 
 export default Navigation;
