@@ -72,15 +72,28 @@ class App extends Component {
       .catch(error => console.log(error));
   }
 
+  onEnterPress = (event) => {
+    if (event.key === 'Enter') {
+      this.onSubmit();
+    }
+  }
+
   render() {
     return (
       <div className="App">
-        <Particles className='particles' params={particlesoptions}/>
+        <Particles
+          className='particles'
+          params={particlesoptions}/>
         <Navigation/>
         <Logo/>
         <Rank/>
-        <ImageLinkForm onInputChange={this.onInputChange} handleClick={this.onSubmit}/>
-        <FaceRecognition imageUrl={this.state.imageUrl} box={this.state.box}/>
+        <ImageLinkForm
+          onInputChange={this.onInputChange}
+          handleClick={this.onSubmit}
+          handleEnter={this.onEnterPress}/>
+        <FaceRecognition
+          imageUrl={this.state.imageUrl}
+          box={this.state.box}/>
       </div>
     );
   }
