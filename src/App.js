@@ -5,7 +5,6 @@ import Logo from './components/Logo/Logo';
 import ImageLinkForm from './components/ImageLinkForm/ImageLinkForm';
 import Rank from './components/Rank/Rank';
 import FaceRecognition from './components/FaceRecognition/FaceRecognition';
-
 import Particles from 'react-particles-js';
 import Clarifai from 'clarifai';
 
@@ -31,21 +30,25 @@ class App extends Component {
     this.state = {
       input: '',
       imageUrl: '',
-      box: {}
+      box: []
     }
   }
 
   calculateFaceLocation = (data) => {
-    const clarifaiFace = data.outputs[0].data.regions[0].region_info.bounding_box;
     const image = document.getElementById('inputimage');
     const width = Number(image.width);
     const height = Number(image.height);
-    return {
-      leftCol: clarifaiFace.left_col * width,
-      topRow: clarifaiFace.top_row * height,
-      rightCol: width - (clarifaiFace.right_col * width),
-      bottomRow: height - (clarifaiFace.bottom_row * height)
-    }
+    const clarifaiFaceArray = data.outputs[0].data.regions;
+    const arrayOfBoxPoints = clarifaiFaceArray.map((region) => {
+      const clarifaiFace = region.region_info.bounding_box;
+      return {
+         leftCol: clarifaiFace.left_col * width,
+         topRow: clarifaiFace.top_row * height,
+         rightCol: width - (clarifaiFace.right_col * width),
+         bottomRow: height - (clarifaiFace.bottom_row * height)
+       }
+    });
+    return arrayOfBoxPoints;
   }
 
   displayFaceBox = (box) => {
