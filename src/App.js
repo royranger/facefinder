@@ -5,6 +5,8 @@ import Logo from './components/Logo/Logo';
 import ImageLinkForm from './components/ImageLinkForm/ImageLinkForm';
 import Rank from './components/Rank/Rank';
 import FaceRecognition from './components/FaceRecognition/FaceRecognition';
+import SignIn from './components/SignIn/SignIn';
+import Register from './components/Register/Register'
 import Particles from 'react-particles-js';
 import Clarifai from 'clarifai';
 
@@ -30,7 +32,9 @@ class App extends Component {
     this.state = {
       input: '',
       imageUrl: '',
-      box: []
+      box: [],
+      route: 'signin',
+      isSignedIn: false
     }
   }
 
@@ -78,22 +82,52 @@ class App extends Component {
     }
   }
 
+  onRouteChange = (route) => {
+    if (route === 'signin') {
+      this.setState({
+        isSignedIn: false
+      });
+    } else if (route === 'home') {
+      this.setState({
+        isSignedIn: true
+      });
+    }
+    this.setState({
+      route: route
+    });
+  }
+
   render() {
+    const {isSignedIn, route, imageUrl, box} = this.state;
     return (
       <div className="App">
         <Particles
           className='particles'
           params={particlesoptions}/>
-        <Navigation/>
-        <Logo/>
-        <Rank/>
-        <ImageLinkForm
-          onInputChange={this.onInputChange}
-          handleClick={this.onSubmit}
-          handleEnter={this.onEnterPress}/>
-        <FaceRecognition
-          imageUrl={this.state.imageUrl}
-          box={this.state.box}/>
+        <Navigation
+          onRouteChange={this.onRouteChange}
+          isSignedIn={isSignedIn}/>
+
+        {this.state.route === 'signin' ?
+          <SignIn onRouteChange={this.onRouteChange}/>
+          : (
+             route === 'home' ?
+            <div>
+              <Logo/>
+              <Rank/>
+              <ImageLinkForm
+                onInputChange={this.onInputChange}
+                handleClick={this.onSubmit}
+                handleEnter={this.onEnterPress}/>
+              <FaceRecognition
+                imageUrl={imageUrl}
+                box={box}/>
+            </div>
+            :
+            <Register onRouteChange={this.onRouteChange}/>
+          )
+
+        }
       </div>
     );
   }
