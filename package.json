@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "bcrypt": "^3.0.0",
-    "clarifai": "^2.7.0",
+    "clarifai": "^2.8.1",
     "react": "^16.3.1",
     "react-dom": "^16.3.1",
     "react-particles-js": "^2.1.2",
