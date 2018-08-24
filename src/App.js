@@ -34,8 +34,27 @@ class App extends Component {
       imageUrl: "",
       box: [],
       route: "signin",
-      isSignedIn: false
+      isSignedIn: false,
+      user: {
+        id: '',
+        name: '',
+        email: '',
+        entries: 0,
+        joined: ''
+      }
     };
+  }
+
+  loadUser = (user) => {
+    this.setState({
+        user: {
+          id: user.id,
+          name: user.name,
+          email: user.email,
+          entries: user.entries,
+          joined: user.joined
+        }
+    });
   }
 
   calculateFaceLocation = data => {
@@ -109,7 +128,8 @@ class App extends Component {
         />
 
         {this.state.route === "signin" ? (
-          <SignIn onRouteChange={this.onRouteChange} />
+          <SignIn onRouteChange={this.onRouteChange}
+                  loadUser={this.loadUser}/>
         ) : route === "home" ? (
           <div>
             <Logo />
@@ -122,7 +142,8 @@ class App extends Component {
             <FaceRecognition imageUrl={imageUrl} box={box} />
           </div>
         ) : (
-          <Register onRouteChange={this.onRouteChange} />
+          <Register onRouteChange={this.onRouteChange}
+                    loadUser={this.loadUser}/>
         )}
       </div>
     );
