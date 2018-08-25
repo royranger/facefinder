@@ -1,8 +1,6 @@
 import React from 'react';
 
-const Rank = ({name, entries, box}) => {
-
-  const numFaces = box.length;
+const Rank = ({name, entries, numFaces}) => {
 
   let photos = 'photos';
   if (entries === 1) {

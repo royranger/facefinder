@@ -40,6 +40,7 @@ class App extends Component {
         name: '',
         email: '',
         entries: 0,
+        faces: 0,
         joined: ''
       }
     };
@@ -52,6 +53,7 @@ class App extends Component {
           name: user.name,
           email: user.email,
           entries: user.entries,
+          faces: user.faces,
           joined: user.joined
         }
     });
@@ -69,6 +71,7 @@ class App extends Component {
         name: '',
         email: '',
         entries: 0,
+        faces: 0,
         joined: ''
       }
     });
@@ -101,14 +104,47 @@ class App extends Component {
     });
   };
 
-  onSubmit = () => {
+  updateFaceCount = () => {
+
+    fetch('http://localhost:3000/facecount', {
+      method: 'put',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({
+        id: this.state.user.id,
+        numFaces: this.state.box.length
+      })
+    })
+    .then(response => response.json())
+    .then(data => {
+      this.setState(Object.assign(this.state.user, {faces: data}));
+    })
+  }
+
+  onPhotoSubmit = () => {
     this.setState({
       imageUrl: this.state.input
     });
     app.models
       .predict(Clarifai.FACE_DETECT_MODEL, this.state.input)
-      .then(response =>
+      .then(response => {
+        if(response) {
+          fetch('http://localhost:3000/image', {
+            method: 'put',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+              id: this.state.user.id
+            })
+          })
+          .then(response => response.json())
+          .then(data => {
+            this.setState(Object.assign(this.state.user, {entries: data}));
+          })
+        }
         this.displayFaceBox(this.calculateFaceLocation(response))
+        this.updateFaceCount();
+
+      }
+
       )
       .catch(error => console.log(error));
   };
@@ -134,6 +170,8 @@ class App extends Component {
     });
   };
 
+
+
   render() {
     const { isSignedIn, route, imageUrl, box } = this.state;
     return (
@@ -153,10 +191,10 @@ class App extends Component {
             <Logo />
             <Rank name={this.state.user.name}
                   entries={this.state.user.entries}
-                  box={box}/>
+                  numFaces={this.state.user.faces}/>
             <ImageLinkForm
               onInputChange={this.onInputChange}
-              handleClick={this.onSubmit}
+              handleClick={this.onPhotoSubmit}
               handleEnter={this.onEnterPress}
             />
             <FaceRecognition imageUrl={imageUrl} box={box} />
