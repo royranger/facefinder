@@ -57,6 +57,18 @@ class App extends Component {
     });
   }
 
+  clearUser = () => {
+    this.setState({
+      user: {
+        id: '',
+        name: '',
+        email: '',
+        entries: 0,
+        joined: ''
+      }
+    });
+  }
+
   calculateFaceLocation = data => {
     const image = document.getElementById("inputimage");
     const width = Number(image.width);
@@ -125,6 +137,7 @@ class App extends Component {
         <Navigation
           onRouteChange={this.onRouteChange}
           isSignedIn={isSignedIn}
+          clearUser={this.clearUser}
         />
 
         {this.state.route === "signin" ? (
