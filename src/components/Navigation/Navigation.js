@@ -1,11 +1,11 @@
 import React from 'react';
 import './Navigation.css';
 
-const Navigation = ({onRouteChange, isSignedIn, clearUser}) => {
+const Navigation = ({onRouteChange, isSignedIn, clearState}) => {
 
   const signOut = () => {
     onRouteChange('signin');
-    clearUser();
+    clearState();
   }
 
   if(isSignedIn) {

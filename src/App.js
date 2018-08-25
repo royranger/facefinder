@@ -57,8 +57,13 @@ class App extends Component {
     });
   }
 
-  clearUser = () => {
+  clearState = () => {
     this.setState({
+      input: "",
+      imageUrl: "",
+      box: [],
+      route: "signin",
+      isSignedIn: false,
       user: {
         id: '',
         name: '',
@@ -137,7 +142,7 @@ class App extends Component {
         <Navigation
           onRouteChange={this.onRouteChange}
           isSignedIn={isSignedIn}
-          clearUser={this.clearUser}
+          clearState={this.clearState}
         />
 
         {this.state.route === "signin" ? (
@@ -146,7 +151,9 @@ class App extends Component {
         ) : route === "home" ? (
           <div>
             <Logo />
-            <Rank />
+            <Rank name={this.state.user.name}
+                  entries={this.state.user.entries}
+                  box={box}/>
             <ImageLinkForm
               onInputChange={this.onInputChange}
               handleClick={this.onSubmit}

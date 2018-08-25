@@ -71,7 +71,8 @@ class Register extends React.Component {
                         name="name"
                         id="name"
                         onChange={this.onNameChange}
-                        onKeyPress={this.handleEnter}/>
+                        onKeyPress={this.handleEnter}
+                        />
               </div>
               <div className="mt3">
                 <label className="db fw6 lh-copy f6" htmlFor="email-address">Email</label>
@@ -80,7 +81,8 @@ class Register extends React.Component {
                         name="email-address"
                         id="email-address"
                         onChange={this.onEmailChange}
-                        onKeyPress={this.handleEnter}/>
+                        onKeyPress={this.handleEnter}
+                        />
               </div>
               <div className="mv3">
                 <label className="db fw6 lh-copy f6" htmlFor="password">Password</label>
@@ -89,7 +91,8 @@ class Register extends React.Component {
                         name="password"
                         id="password"
                         onChange={this.onPasswordChange}
-                        onKeyPress={this.handleEnter}/>
+                        onKeyPress={this.handleEnter}
+                        />
               </div>
             </fieldset>
             <div className="">

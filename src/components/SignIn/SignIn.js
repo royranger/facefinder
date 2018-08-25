@@ -35,7 +35,7 @@ class SignIn extends React.Component  {
     })
     .then(response => response.json())
     .then(data => {
-      if (data !== "Incorrect email and/or password.") {
+      if (data.id) {
         loadUser(data);
         onRouteChange('home');
       }

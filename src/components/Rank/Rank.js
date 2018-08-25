@@ -1,13 +1,26 @@
 import React from 'react';
 
-const Rank = () => {
+const Rank = ({name, entries, box}) => {
+
+  const numFaces = box.length;
+
+  let photos = 'photos';
+  if (entries === 1) {
+    photos = 'photo';
+  }
+
+  let faces = 'faces';
+  if (numFaces === 1) {
+    faces = 'face';
+  }
+
   return(
     <div>
       <div className='white f3'>
-        {'Joy, your current rank is...'}
+        {`${name}, you have found`}
       </div>
       <div className='white f1'>
-        {'#1'}
+        {`${numFaces} ${faces} in ${entries} ${photos}!`}
       </div>
     </div>
   );
