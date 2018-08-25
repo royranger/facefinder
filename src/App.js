@@ -116,7 +116,9 @@ class App extends Component {
     })
     .then(response => response.json())
     .then(data => {
-      this.setState(Object.assign(this.state.user, {faces: data}));
+      this.setState({
+        user: Object.assign(this.state.user, {faces: data})
+      });
     })
   }
 
@@ -137,7 +139,9 @@ class App extends Component {
           })
           .then(response => response.json())
           .then(data => {
-            this.setState(Object.assign(this.state.user, {entries: data}));
+            this.setState({
+              user: Object.assign(this.state.user, {entries: data})
+            });
           })
         }
         this.displayFaceBox(this.calculateFaceLocation(response))
