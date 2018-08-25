@@ -51,6 +51,12 @@ class Register extends React.Component {
 
   }
 
+  handleEnter = event => {
+    if (event.key === "Enter") {
+      this.onSubmitRegister();
+    }
+  }
+
   render() {
     return(
       <article className="br3 ba b--black-10 mv4 w-100 w-50-m w-25-l mw6 shadow-5 center">
@@ -64,7 +70,8 @@ class Register extends React.Component {
                         type="text"
                         name="name"
                         id="name"
-                        onChange={this.onNameChange}/>
+                        onChange={this.onNameChange}
+                        onKeyPress={this.handleEnter}/>
               </div>
               <div className="mt3">
                 <label className="db fw6 lh-copy f6" htmlFor="email-address">Email</label>
@@ -72,7 +79,8 @@ class Register extends React.Component {
                         type="email"
                         name="email-address"
                         id="email-address"
-                        onChange={this.onEmailChange}/>
+                        onChange={this.onEmailChange}
+                        onKeyPress={this.handleEnter}/>
               </div>
               <div className="mv3">
                 <label className="db fw6 lh-copy f6" htmlFor="password">Password</label>
@@ -80,7 +88,8 @@ class Register extends React.Component {
                         type="password"
                         name="password"
                         id="password"
-                        onChange={this.onPasswordChange}/>
+                        onChange={this.onPasswordChange}
+                        onKeyPress={this.handleEnter}/>
               </div>
             </fieldset>
             <div className="">

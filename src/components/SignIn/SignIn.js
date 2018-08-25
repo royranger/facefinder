@@ -42,6 +42,12 @@ class SignIn extends React.Component  {
     })
   }
 
+  handleEnter = event => {
+    if (event.key === "Enter") {
+      this.onSubmitSignIn();
+    }
+  }
+
   render() {
     const {onRouteChange} = this.props;
     return(
@@ -56,7 +62,8 @@ class SignIn extends React.Component  {
                         type="email"
                         name="email-address"
                         id="email-address"
-                        onChange={this.onEmailChange}/>
+                        onChange={this.onEmailChange}
+                        onKeyPress={this.handleEnter}/>
               </div>
               <div className="mv3">
                 <label className="db fw6 lh-copy f6" htmlFor="password">Password</label>
@@ -64,7 +71,8 @@ class SignIn extends React.Component  {
                         type="password"
                         name="password"
                         id="password"
-                        onChange={this.onPasswordChange}/>
+                        onChange={this.onPasswordChange}
+                        onKeyPress={this.handleEnter}/>
               </div>
             </fieldset>
             <div className="">
