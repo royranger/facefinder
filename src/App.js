@@ -155,7 +155,7 @@ class App extends Component {
 
   onEnterPress = event => {
     if (event.key === "Enter") {
-      this.onSubmit();
+      this.onPhotoSubmit();
     }
   };
 
@@ -181,6 +181,7 @@ class App extends Component {
     return (
       <div className="App">
         <Particles className="particles" params={particlesoptions} />
+        <h1 className="f1">{'Facefinder'}</h1>
         <Navigation
           onRouteChange={this.onRouteChange}
           isSignedIn={isSignedIn}

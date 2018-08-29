@@ -16,3 +16,8 @@
   left: 0;
   z-index: -1;
 }
+
+h1 {
+  float:left;
+  padding-left: 15px;
+}
