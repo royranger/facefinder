@@ -46,14 +46,15 @@ class Register extends React.Component {
         if (data.id) {
           loadUser(data);
           onRouteChange('home');
-        } else if (data === 'incorrect form submission'){
+        } else if (data === 'incorrect form submission') {
           window.alert('Unable to register. Please fill out all fields');
-        } else {
-          window.alert('User already exists');
-        }
-      })
-
-  }
+        } else if (data === 'email is not valid') {
+          window.alert('Unable to register. Please enter a valid email');
+      } else {
+      window.alert('User already exists');
+    }
+  })
+}
 
   handleEnter = event => {
     if (event.key === "Enter") {
