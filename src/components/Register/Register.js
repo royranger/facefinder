@@ -43,9 +43,13 @@ class Register extends React.Component {
     })
       .then(response => response.json())
       .then(data => {
-        if (data) {
+        if (data.id) {
           loadUser(data);
           onRouteChange('home');
+        } else if (data === 'incorrect form submission'){
+          window.alert('Unable to register. Please fill out all fields');
+        } else {
+          window.alert('User already exists');
         }
       })
 
